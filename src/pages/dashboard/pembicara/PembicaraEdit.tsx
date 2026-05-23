@@ -5,7 +5,8 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
 
-const API_URL = import.meta.env.VITE_API_URL || "https://utsbackend-liart.vercel.app";
+// 1. Menggunakan endpoint terpadu /speakers sesuai dengan API Vercel
+const API_URL = "https://utsbackend-liart.vercel.app/speakers";
 
 const schema = z.object({
   name: z.string().min(3, "Nama minimal 3 karakter"),
@@ -28,29 +29,46 @@ export default function PembicaraEdit() {
   useEffect(() => {
     const loadSpeaker = async () => {
       try {
-        const response = await axios.get(`${API_URL}/pembicara/${id}`);
-        const data = response.data;
+        // 2. Memperbaiki URL pemanggilan data tunggal ke /speakers/:id
+        const response = await axios.get(`${API_URL}/${id}`);
         
-        setValue("name", data.name, { shouldValidate: true });
-        setValue("job", data.job, { shouldValidate: true });
-        setValue("email", data.email, { shouldValidate: true });
-        setValue("photo", data.photo, { shouldValidate: true });
-        setValue("bio", data.bio || "", { shouldValidate: true });
-        setValue("status", data.status, { shouldValidate: true });
+        // Jaga-jaga jika data dibungkus dalam objek .data oleh Vercel
+        const result = response.data;
+        const data = result.data ? result.data : result;
+        
+        if (data) {
+          setValue("name", data.name, { shouldValidate: true });
+          // 3. Menjembatani 'role' dari API masuk ke input 'job' di form kamu
+          setValue("job", data.role || data.job, { shouldValidate: true });
+          setValue("email", data.email, { shouldValidate: true });
+          setValue("photo", data.photo, { shouldValidate: true });
+          setValue("bio", data.bio || "", { shouldValidate: true });
+          setValue("status", data.status, { shouldValidate: true });
+        }
       } catch (error) {
         console.error("Gagal memuat data pembicara:", error);
-        alert("Data pembicara tidak ditemukan!");
+        alert("Data pembicara tidak ditemukan di server!");
         navigate("/dashboard/pembicara");
       }
     };
-    loadSpeaker();
+    if (id) loadSpeaker();
   }, [id, setValue, navigate]);
 
-  const onSubmit = async (data: FormData) => {
+  const onSubmit = async (formData: FormData) => {
     try {
-      await axios.put(`${API_URL}/pembicara/${id}`, data);
+      // 4. Memetakan balik data 'job' dari form menjadi 'role' sebelum dikirim ke API Vercel
+      const payload = {
+        name: formData.name,
+        role: formData.job, // Diubah kembali menjadi 'role' agar dikenali database
+        email: formData.email,
+        photo: formData.photo,
+        bio: formData.bio,
+        status: formData.status
+      };
+
+      await axios.put(`${API_URL}/${id}`, payload);
       alert("Data pembicara berhasil diperbarui!");
-      navigate("/dashboard/pembicara"); // ✅ Tetap aman ke /pembicara
+      navigate("/dashboard/pembicara");
     } catch (error: any) {
       console.error(error);
       alert(error.response?.data?.message || "Gagal memperbarui pembicara.");

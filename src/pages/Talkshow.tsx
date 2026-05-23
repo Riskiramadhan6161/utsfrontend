@@ -53,21 +53,21 @@ export default function Talkshow() {
   ];
 
   return (
-    <div className="bg-gray-50">
+    <div className="bg-red-50">
 
       {/* HERO */}
-      <section className="max-w-6xl mx-auto px-6 py-20 flex flex-col md:flex-row items-center gap-10">
+      <section className="max-w-6xl mx-auto px-6 py-26 flex flex-col md:flex-row items-center gap-10">
 
         <div className="flex-1">
           <h1 className="text-4xl md:text-5xl font-bold text-red-900 mb-4">
             IT Talkshow
           </h1>
 
-          <h2 className="text-xl md:text-2xl text-red-800 mb-6">
+          <h2 className="text-xl md:text-2xl text-red-900 mb-6">
             "Humanizing Technology: Kolaborasi Manusia dan AI di Masa Depan"
           </h2>
 
-          <p className="text-gray-600 leading-relaxed mb-8">
+          <p className="text-gray-800 leading-relaxed mb-8">
             Talkshow “Humanizing Technology: Kolaborasi Manusia dan AI di Masa Depan” Sebuah diskusi interaktif yang mengeksplorasi cara
             mengintegrasikan nilai-nilai kemanusiaan seperti etika, empati, dan kreativitas ke dalam pengembangan kecerdasan buatan.
             yang bertujuan menginspirasi audiens untuk membangun dan memanfaatkan AI sebagai alat kolaboratif yang memperkuat potensi
@@ -89,12 +89,12 @@ export default function Talkshow() {
       </section>
 
       {/*  DESKRIPSI */}
-      <section className="py-20 px-6 text-center">
-        <h2 className="text-2xl md:text-3xl font-bold text-red-900 mb-4">
+      <section className="py-26 px-6 text-center">
+        <h2 className="text-2xl md:text-3xl font-bold text-red-1000 mb-4">
           Tentang IT Talkshow
         </h2>
 
-        <p className="max-w-3xl mx-auto text-gray-700 leading-relaxed">
+        <p className="max-w-3xl mx-auto text-red-700 leading-relaxed">
           Seiring teknologi, khususnya kecerdasan buatan (AI), yang semakin meresap ke dalam setiap aspek kehidupan kita, muncul sebuah pertanyaan fundamental:
           Apakah kita sedang menciptakan teknologi yang melayani manusia, atau justru sebaliknya? Untuk menjawab pertanyaan tersebut, kami mempersembahkan talkshow
           berskala nasional: “Humanizing Technology: Kolaborasi Manusia dan AI di Masa Depan.” Acara ini dirancang bukan untuk membahas teknologi sebagai entitas yang
@@ -132,7 +132,7 @@ export default function Talkshow() {
           <div className="bg-white rounded-xl shadow-md p-6 flex items-center gap-4">
             <Calendar className="text-red-900" />
             <div>
-              <p className="text-gray-500 text-sm">Tanggal</p>
+              <p className="text-red-800 text-sm">Tanggal</p>
               <h3 className="text-lg font-semibold text-red-900">
                 Senin, 24 November 2025
               </h3>
@@ -140,9 +140,9 @@ export default function Talkshow() {
           </div>
 
           <div className="bg-white rounded-xl shadow-md p-6 flex items-center gap-4">
-            <Clock className="text-red-900" />
+            <Clock className="text-gray-900" />
             <div>
-              <p className="text-gray-500 text-sm">Waktu</p>
+              <p className="text-gray-800 text-sm">Waktu</p>
               <h3 className="text-lg font-semibold text-red-900">
                 08.00 WIB - 12.00 WIB
               </h3>
